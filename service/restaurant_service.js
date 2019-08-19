@@ -1,7 +1,16 @@
 let Restaurant = require('../model/restaurant.model');
 let Error = require('../model/error.model');
 
-const RestaurantService = {};
+const RestaurantService = {
+
+};
+
+RestaurantService.deleteById=(id, callback)=> {
+	Restaurant.remove({_id:id}, (err) => {
+		callback(err);
+	});
+}
+
 
 RestaurantService.findAll = (page, callback) => {
 	Restaurant.find({},(err, restaurants) => {
@@ -41,13 +50,15 @@ RestaurantService.createNewRestaurant = (body, callback) => {
 };
 
 RestaurantService.updateRestaurant = async (body, callback) => {
-	this.findById(req.id, (err, restaurant) => {
+	RestaurantService.findById(body.id, (err, restaurant) => {
 		if (err) {
 			callback(err);
 		} else {
 			mergeElements(restaurant, body).save((err) => {
-				console.error(err);
-				callback(Error.ImposibleToSaveError)
+				if(err) {
+					console.error(err);
+					callback(Error.ImposibleToSaveError())
+				}
 			});
 			callback(null, restaurant);
 		}

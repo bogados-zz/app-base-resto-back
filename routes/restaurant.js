@@ -21,4 +21,8 @@ router.put('/',(req,res,next)=> {
 	restaurant_controller.restaurant_update(req, res);
 });
 
+router.delete('/:id', (req, res, next) => {
+	restaurant_controller.delete_restaurant(req, res)
+});
+
 module.exports = router;

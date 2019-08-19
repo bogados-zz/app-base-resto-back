@@ -1,5 +1,6 @@
 exports.NOT_VALID_REQUEST_STATUS = 400;
 exports.SERVICE_NOT_AVAILABLE = 503;
+exports.INTERNAL_SERVER_ERROR = 503;
 exports.NOT_FOUND_STATUS = 404;
 
 exports.NotValidRequest = (message)=>{
@@ -32,6 +33,14 @@ exports.NotFoundError= (message)=>{
 		error:"Not found element",
 		message: message ? message : "The element that you are trying to access was not found",
 		status: this.NOT_FOUND_STATUS
+	};
+}
+
+exports.UnhanddleError= (message)=>{
+	return {
+		error:"Unhandled error",
+		message: message ? message : "We had an error in the transaction, please retry again or contact with your system administrator",
+		status: this.INTERNAL_SERVER_ERROR
 	};
 };
 
