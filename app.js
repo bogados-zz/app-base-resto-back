@@ -21,5 +21,5 @@ app.use('/restaurant', restaurant);
 app.use('/', index);
 
 const PORT = 5000;
-app.set('port', PORT);
+app.listen(PORT);
 module.exports=app;
